@@ -3,7 +3,7 @@
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetController;
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 /* --- Not connected user --- */
 
 /* --- Authentication --- */
-Route::post('/register', [RegisterController::class, 'register']);
-Route::post('/login', [RegisterController::class, 'login']);
-Route::get('/login', [RegisterController::class, 'login_failed'])
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/login', [AuthController::class, 'login_failed'])
     ->name('login_failed');
 
 /* --- Password --- */
