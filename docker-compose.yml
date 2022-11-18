@@ -16,7 +16,7 @@ services:
         depends_on:
             - db
         build:
-            context: .
+            context: php-fpm/.
         volumes:
             - ./:/var/www:cached
         ports:
