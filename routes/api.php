@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\AuthController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,22 +17,22 @@ use Illuminate\Support\Facades\Route;
 
 /* --- Authentication --- */
 Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
-Route::get('/login', [AuthController::class, 'login_failed'])
-    ->name('login_failed');
+Route::match(['get', 'post'], '/login', [AuthController::class, 'login'])
+    ->name('login');
 
 /* --- Password --- */
-Route::post('/forgot-password', [PasswordResetController::class, 'store']);
-Route::get('/reset-password/{token}', [NewPasswordController::class, 'create'])
-    ->name('password.reset');
-Route::post('/reset-password', [NewPasswordController::class, 'store']);
+//Route::post('/forgot-password', [PasswordResetController::class, 'store']);
+//Route::get('/reset-password/{token}', [NewPasswordController::class, 'create'])
+//    ->name('password.reset');
+//Route::post('/reset-password', [NewPasswordController::class, 'store']);
 
 
 /* --- Connected user --- */
 Route::middleware('auth:sanctum')->group(function () {
 
     /* --- Users --- */
-    Route::get('/users', [UserController::class, 'index']);
-    Route::get('/users/{id}', [UserController::class, 'show']);
-    Route::put('/users/{id}', [UserController::class, 'update']);
+    Route::apiResource('/users', UserController::class);
+
+    /* --- Restaurants --- */
+    Route::apiResource('/restaurants', RestaurantController::class);
 });
