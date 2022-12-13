@@ -26,7 +26,7 @@ class UserResource extends JsonResource
             'birthDate' => $this->birthDate,
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,
-            'disableAt' => $this->disable_at,
+            'disabledAt' => $this->disable_at,
             'roles' => RoleResource::collection($this->roles),
         ];
     }

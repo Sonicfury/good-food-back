@@ -57,4 +57,17 @@ class AuthTest extends TestCase
 
         $response->assertSessionHasErrors(['email', 'password']);
     }
+
+    /**
+     * @return void
+     */
+    public function test_login_parameter_cannot_be_null(): void
+    {
+        $response = $this->post('/api/login', [
+            'email' => '',
+            'password' => '',
+        ]);
+
+        $response->assertSessionHasErrors(['email', 'password']);
+    }
 }
