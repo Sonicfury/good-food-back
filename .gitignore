@@ -18,6 +18,4 @@ yarn-error.log
 /.vscode
 /pnpm-lock.yaml
 
-fly.toml
-/.fly
 composer.lock
