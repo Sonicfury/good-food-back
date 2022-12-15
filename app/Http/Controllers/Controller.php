@@ -15,11 +15,11 @@ class Controller extends BaseController
     /**
      * success response method.
      *
-     * @param $result
-     * @param $message
+     * @param mixed $result
+     * @param string $message
      * @return JsonResponse
      */
-    public function sendResponse($result, $message): JsonResponse
+    public function handleResponse(mixed $result, string $message): JsonResponse
     {
         $response = [
             'success' => true,
@@ -27,27 +27,18 @@ class Controller extends BaseController
             'message' => $message,
         ];
 
-        return response()->json($response, 200);
+        return response()->json($response);
     }
 
     /**
      * return error response.
-     *
-     * @param $error
-     * @param array $errorMessages
-     * @param int $code
-     * @return JsonResponse
      */
-    public function sendError($error, array $errorMessages = [], int $code = 404): JsonResponse
+    public function handleError(string $message, int $code = 404): JsonResponse
     {
         $response = [
             'success' => false,
-            'message' => $error,
+            'error' => $message,
         ];
-
-        if(!empty($errorMessages)){
-            $response['data'] = $errorMessages;
-        }
 
         return response()->json($response, $code);
     }

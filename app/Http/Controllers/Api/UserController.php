@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\User\UpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -19,15 +18,15 @@ class UserController extends Controller
      */
     public function index(): JsonResponse
     {
-        return $this->sendResponse(UserResource::collection(User::all()), 'Users found successfully.');
+        return $this->handleResponse(UserResource::collection(User::all()), 'Users found successfully.');
     }
 
     /**
      * Store the specified user.
      *
-     * @param UserRequest $request
+     * @param UpdateRequest $request
      */
-    public function store(UserRequest $request)
+    public function store(UpdateRequest $request)
     {
         //
     }
@@ -35,49 +34,29 @@ class UserController extends Controller
     /**
      * Display the specified user.
      *
-     * @param $id
+     * @param User $user
      * @return JsonResponse
      */
-    public function show($id): JsonResponse
+    public function show(User $user): JsonResponse
     {
-        $user = User::findOrFail($id);
-
-        return $this->sendResponse(UserResource::make($user), 'User found successfully.');
+        return $this->handleResponse(UserResource::make($user), 'User found successfully.');
     }
 
     /**
-     * @param UserRequest $request
-     * @param $id
+     * @param UpdateRequest $request
+     * @param User $user
      * @return JsonResponse
      */
-    public function update(UserRequest $request, $id): JsonResponse
+    public function update(UpdateRequest $request, User $user): JsonResponse
     {
-        $user = User::findOrFail($id);
+        $request->validated();
 
-        $user->update([
-            'email' => $request->email ?? $user->email,
-            'firstname' => $request->firstname ?? $user->firstname,
-            'lastname' => $request->lastname ?? $user->lastname,
-            'primaryPhone' => $request->primaryPhone ?? $user->primaryPhone,
-            'secondaryPhone' => $request->secondaryPhone ?? $user->secondaryPhone,
-        ]);
+        $data = $request->all();
 
-        return $this->sendResponse(UserResource::make($user), 'User updated successfully.');
+        $data['birthDate'] = Carbon::createFromFormat('d-m-Y', $data['birthDate'])->format('Y-m-d');
+
+        $user->update($data);
+
+        return $this->handleResponse(UserResource::make($user), 'User updated successfully.');
     }
-
-//    /**
-//     * Destroy the specified user.
-//     *
-//     * @param $id
-//     * @return JsonResponse
-//     */
-//    public function destroy($id): JsonResponse
-//    {
-//        $user = User::findOrFail($id);
-//
-//        $user->disabled_at = Carbon::now();
-//        $user->save();
-//
-//        return $this->sendResponse(UserResource::make($user), 'User disabled successfully.');
-//    }
 }
