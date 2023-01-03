@@ -21,6 +21,8 @@ class RestaurantFactory extends Factory
             'name' => fake()->name,
             'address1' => fake()->address,
             'zipCode' => rand(10000, 99999),
+            'lat' => rand(50, 50.999999),
+            'long' => rand(2, 3.999999),
             'city' => fake()->city,
             'primaryPhone' => fake()->phoneNumber,
         ];

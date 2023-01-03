@@ -11,7 +11,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('restaurants', function (Blueprint $table) {
             $table->id();
@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('address2')->nullable();
             $table->integer('zipCode');
             $table->string('city');
+            $table->string('lat')->nullable();
+            $table->string('long')->nullable();
             $table->string('primaryPhone');
             $table->string('secondaryPhone')->nullable();
             $table->dateTime('disabled_at')->nullable();
@@ -32,7 +34,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('restaurants');
     }

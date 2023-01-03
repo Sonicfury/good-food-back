@@ -11,7 +11,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
@@ -20,10 +20,6 @@ return new class extends Migration
             $table->string('password');
             $table->string('firstname')->nullable();
             $table->string('lastname')->nullable();
-            $table->string('address1')->nullable();
-            $table->string('address2')->nullable();
-            $table->integer('zipCode')->nullable();
-            $table->string('city')->nullable();
             $table->string('primaryPhone')->nullable();
             $table->string('secondaryPhone')->nullable();
             $table->date('birthDate')->nullable();
@@ -38,7 +34,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('users');
     }
