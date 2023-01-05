@@ -21,6 +21,8 @@ class Restaurant extends Model
         'address2',
         'zipCode',
         'city',
+        'lat',
+        'long',
         'primaryPhone',
         'secondaryPhone',
         'disabled_at',

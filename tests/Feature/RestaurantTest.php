@@ -4,8 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\Restaurant;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class RestaurantTest extends TestCase
@@ -19,6 +17,16 @@ class RestaurantTest extends TestCase
 
         $response = $this->actingAs($user)
             ->get('/api/restaurants');
+
+        $response->assertStatus(200);
+    }
+
+    public function test_restaurant_can_be_display_restaurants_with_km(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)
+            ->get('/api/restaurants?coords=50.494750,2.852260');
 
         $response->assertStatus(200);
     }

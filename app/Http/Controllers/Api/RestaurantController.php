@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Facades\Distance;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Restaurant\UpdateRequest;
 use App\Http\Resources\RestaurantResource;
 use App\Models\Restaurant;
-use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 
 class RestaurantController extends Controller
@@ -18,7 +18,9 @@ class RestaurantController extends Controller
      */
     public function index(): JsonResponse
     {
-        return $this->handleResponse(RestaurantResource::collection(Restaurant::all()), 'Restaurants found successfully.');
+        $restaurants = isset($_GET['coords']) ? Distance::restaurant_with_km($_GET['coords']) : Restaurant::all();
+
+        return $this->handleResponse(RestaurantResource::collection($restaurants), 'Restaurants found successfully.');
     }
 
     /**
