@@ -16,7 +16,7 @@ class RestaurantTest extends TestCase
          $user = User::factory()->create();
 
         $response = $this->actingAs($user)
-            ->get('/api/restaurants');
+            ->getJson('/api/restaurants');
 
         $response->assertStatus(200);
     }
@@ -26,7 +26,7 @@ class RestaurantTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)
-            ->get('/api/restaurants?coords=50.494750,2.852260');
+            ->getJson('/api/restaurants?coords=50.494750,2.852260');
 
         $response->assertStatus(200);
     }
@@ -41,7 +41,7 @@ class RestaurantTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)
-            ->get('/api/restaurants/'. $restaurant->id);
+            ->getJson('/api/restaurants/'. $restaurant->id);
 
         $response->assertStatus(200);
     }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Auth\NewPasswordController;
@@ -20,6 +22,10 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::match(['get', 'post'], '/login', [AuthController::class, 'login'])
     ->name('login');
 
+/* --- Restaurants --- */
+Route::get('/restaurants', [RestaurantController::class, 'index']);
+Route::get('/restaurants/{id}', [RestaurantController::class, 'show']);
+
 /* --- Connected user --- */
 Route::middleware('auth:sanctum')->group(function () {
 
@@ -27,5 +33,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/users', UserController::class);
 
     /* --- Restaurants --- */
-    Route::apiResource('/restaurants', RestaurantController::class);
+    Route::post('/restaurants', [RestaurantController::class, 'store']);
+    Route::put('/restaurants/{id}', [RestaurantController::class, 'update']);
+    Route::delete('/restaurants/{id}', [RestaurantController::class, 'destroy']);
+
+    /* --- Categories --- */
+    Route::apiResource('/categories', CategoryController::class);
+
+    /* --- Products --- */
+    Route::apiResource('/products', ProductController::class);
 });
