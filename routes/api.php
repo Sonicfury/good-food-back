@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\PromoteController;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Auth\NewPasswordController;
@@ -42,4 +43,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     /* --- Products --- */
     Route::apiResource('/products', ProductController::class);
+
+    /* --- Promotes --- */
+    Route::apiResource('/promotes', PromoteController::class);
 });
