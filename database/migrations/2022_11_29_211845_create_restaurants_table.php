@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('address2')->nullable();
             $table->integer('zipCode');
             $table->string('city');
-            $table->string('lat')->nullable();
-            $table->string('long')->nullable();
+            $table->float('lat')->nullable();
+            $table->float('long')->nullable();
             $table->string('primaryPhone');
             $table->string('secondaryPhone')->nullable();
             $table->dateTime('disabled_at')->nullable();

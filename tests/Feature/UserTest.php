@@ -18,7 +18,7 @@ class UserTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)
-            ->get('/api/users');
+            ->getJson('/api/users');
 
         $response->assertStatus(200);
     }
@@ -31,7 +31,7 @@ class UserTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)
-            ->get('/api/users/'. $user->id);
+            ->getJson('/api/users/'. $user->id);
 
         $response->assertStatus(200);
     }
@@ -55,7 +55,7 @@ class UserTest extends TestCase
         $user = User::find($user->id);
 
         $response = $this->actingAs($user)
-            ->put('/api/users/'. $user->id, [
+            ->putJson('/api/users/'. $user->id, [
                 'email' => 'new@example.com',
                 'firstname' => 'new_firstname',
                 'lastname' => 'new_lastname',
