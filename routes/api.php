@@ -1,12 +1,11 @@
 <?php
 
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\ProductController;
-use App\Http\Controllers\Api\PromoteController;
+use App\Http\Controllers\Api\OfferController;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\Auth\NewPasswordController;
-use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +43,9 @@ Route::middleware('auth:sanctum')->group(function () {
     /* --- Products --- */
     Route::apiResource('/products', ProductController::class);
 
-    /* --- Promotes --- */
-    Route::apiResource('/promotes', PromoteController::class);
+    /* --- Offers --- */
+    Route::apiResource('/offers', OfferController::class);
+
+    /* --- Menus --- */
+    Route::apiResource('/menus', MenuController::class);
 });

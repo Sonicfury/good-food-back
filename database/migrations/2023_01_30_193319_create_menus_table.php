@@ -13,16 +13,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('promotes', function (Blueprint $table) {
+        Schema::create('menus', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('percent');
+            $table->float('price');
+            $table->timestamps();
+        });
+
+        Schema::create('menu_product', function (Blueprint $table) {
+            $table->unsignedBigInteger('menu_id');
+            $table->foreign('menu_id')
+                ->references('id')
+                ->on('menus')
+                ->onDelete('cascade');
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')
                 ->references('id')
                 ->on('products')
                 ->onDelete('cascade');
-            $table->timestamps();
+            $table->primary(['menu_id', 'product_id']);
         });
     }
 
@@ -33,6 +42,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('promotes');
+        Schema::dropIfExists('menus');
     }
 };

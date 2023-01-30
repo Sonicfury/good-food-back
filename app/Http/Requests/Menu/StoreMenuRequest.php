@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Promote;
+namespace App\Http\Requests\Menu;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePromoteRequest extends FormRequest
+class StoreMenuRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,8 @@ class StorePromoteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'string|unique:promotes|max:25',
-            'price' => 'numeric|between:1,99',
-            'product_id' => 'numeric',
+            'name' => 'string|unique:products|max:25',
+            'price' => 'numeric|between:0,9999999999.99',
         ];
     }
 }
