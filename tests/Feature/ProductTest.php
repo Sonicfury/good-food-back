@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\Category;
+use App\Models\Menu;
+use App\Models\Offer;
 use App\Models\Product;
 use App\Models\User;
 
@@ -97,5 +99,51 @@ class ProductTest extends TestCase
             ->deleteJson('/api/products/'. $product->id);
 
         $response->assertStatus(200);
+    }
+
+    /**
+     * @return void
+     */
+    public function test_product_can_belong_to_category(): void
+    {
+        $category = Category::factory()->create();
+
+        $product = Product::factory()->create(['category_id' => $category->id]);
+
+        $product_category = $product->category;
+
+        $this->assertEquals($product_category->id, $category->id);
+    }
+
+    /**
+     * @return void
+     */
+    public function test_product_can_have_offer(): void
+    {
+        $product = Product::factory()->create();
+
+        $offer = Offer::factory()->create();
+
+        $product->offers()->save($offer);
+
+        $product_offer = collect($product->offers)->where('offerable_id', $offer->offerable_id)->first();
+
+        $this->assertEquals($product_offer->offerable_id, $offer->offerable_id);
+    }
+
+    /**
+     * @return void
+     */
+    public function test_product_can_have_menu(): void
+    {
+        $product = Product::factory()->create();
+
+        $menu = Menu::factory()->create();
+
+        $product->menus()->attach($menu->id);
+
+        $product_menus = $product->menus;
+
+        $this->assertEquals($product_menus[0]->id, $menu->id);
     }
 }

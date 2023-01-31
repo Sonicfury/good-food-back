@@ -2,15 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Traits\hasOffer;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Product extends Model
+class Product extends hasOffer
 {
-    use HasFactory;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -32,10 +29,10 @@ class Product extends Model
     }
 
     /**
-     * Get the products for the blog post.
+     * The roles that belong to the user.
      */
-    public function products(): HasMany
+    public function menus(): BelongsToMany
     {
-        return $this->hasMany(Promote::class);
+        return $this->belongsToMany(Menu::class);
     }
 }

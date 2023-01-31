@@ -1,12 +1,11 @@
 <?php
 
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\ProductController;
-use App\Http\Controllers\Api\PromoteController;
+use App\Http\Controllers\Api\OfferController;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\Auth\NewPasswordController;
-use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 /* --- Not connected user --- */
-
+Route::post('/menus/{menu}/offers', [OfferController::class, 'menu_store']);
 /* --- Authentication --- */
 Route::post('/register', [AuthController::class, 'register']);
 Route::match(['get', 'post'], '/login', [AuthController::class, 'login'])
@@ -35,15 +34,23 @@ Route::middleware('auth:sanctum')->group(function () {
 
     /* --- Restaurants --- */
     Route::post('/restaurants', [RestaurantController::class, 'store']);
-    Route::put('/restaurants/{id}', [RestaurantController::class, 'update']);
-    Route::delete('/restaurants/{id}', [RestaurantController::class, 'destroy']);
+    Route::match(['put', 'patch'], '/restaurants/{restaurant}', [RestaurantController::class, 'update']);
+    Route::delete('/restaurants/{restaurant}', [RestaurantController::class, 'destroy']);
 
     /* --- Categories --- */
     Route::apiResource('/categories', CategoryController::class);
 
     /* --- Products --- */
     Route::apiResource('/products', ProductController::class);
+    Route::post('/products/{product}/offers', [OfferController::class, 'product_store']);
 
-    /* --- Promotes --- */
-    Route::apiResource('/promotes', PromoteController::class);
+    /* --- Offers --- */
+    Route::get('/offers', [OfferController::class, 'index']);
+    Route::get('/offers/{offer}', [OfferController::class, 'show']);
+    Route::match(['put', 'patch'], '/offers/{offer}', [OfferController::class, 'update']);
+    Route::delete('/offers/{offer}', [OfferController::class, 'destroy']);
+
+    /* --- Menus --- */
+    Route::apiResource('/menus', MenuController::class);
+
 });

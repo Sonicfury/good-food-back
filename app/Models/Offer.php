@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
-class Promote extends Model
+class Offer extends Model
 {
     use HasFactory;
 
@@ -19,14 +19,15 @@ class Promote extends Model
         'id',
         'name',
         'percent',
-        'product_id'
+        'offerable_type',
+        'offerable_id'
     ];
 
     /**
-     * Get the category that owns the comment.
+     * Get the parent commentable model (post or video).
      */
-    public function product(): BelongsTo
+    public function offerable(): MorphTo
     {
-        return $this->belongsTo(Product::class);
+        return $this->morphTo();
     }
 }

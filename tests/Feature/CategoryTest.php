@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Product;
 use App\Models\User;
 use App\Models\Category;
 use Tests\TestCase;
@@ -87,5 +88,19 @@ class CategoryTest extends TestCase
             ->deleteJson('/api/categories/'. $category->id);
 
         $response->assertStatus(200);
+    }
+
+    /**
+     * @return void
+     */
+    public function test_category_can_have_product(): void
+    {
+        $category = Category::factory()->create();
+
+        $product = Product::factory()->create(['category_id' => $category->id]);
+
+        $category_products = $category->products;
+
+        $this->assertEquals($category_products[0]->id, $product->id);
     }
 }
