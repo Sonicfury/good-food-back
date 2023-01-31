@@ -20,7 +20,6 @@ class OfferFactory extends Factory
         return [
             'name' => fake()->name,
             'percent' => rand(5, 55),
-            'product_id' => rand(1,5),
         ];
     }
 }

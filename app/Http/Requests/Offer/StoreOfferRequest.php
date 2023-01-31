@@ -25,8 +25,7 @@ class StoreOfferRequest extends FormRequest
     {
         return [
             'name' => 'string|unique:offers|max:25',
-            'price' => 'numeric|between:1,99',
-            'product_id' => 'numeric',
+            'percent' => 'numeric|between:1,99',
         ];
     }
 }

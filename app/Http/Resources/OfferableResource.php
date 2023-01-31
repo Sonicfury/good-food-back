@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class OfferResource extends JsonResource
+class OfferableResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,8 +18,7 @@ class OfferResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'percent' => $this->percent,
-            'offerable' => $this->offerable_id && $this->offerable_type ?? OfferableResource::make($this->offerable),
+            'price' => $this->price,
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,
         ];

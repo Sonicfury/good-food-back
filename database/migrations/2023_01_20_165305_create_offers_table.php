@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('percent');
-            $table->unsignedBigInteger('product_id');
 
             $table->string('offerable_type')->nullable();
             $table->unsignedBigInteger('offerable_id')->nullable();

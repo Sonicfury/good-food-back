@@ -26,20 +26,39 @@ class OfferTest extends TestCase
     /**
      * @return void
      */
-    public function test_offer_can_be_stored(): void
+    public function test_menu_offer_can_be_stored(): void
     {
-        $product = Product::factory()->create();
-
         $user = User::factory()->create();
 
+        $menu = Menu::factory()->create();
+
         $body = [
-            'name' => 'test_name',
+            'name' => 'test_menu_name',
             'percent' => 20.50,
-            'product_id' => $product->id
         ];
 
         $response = $this->actingAs($user)
-            ->postJson('/api/offers', $body);
+            ->postJson('/api/menus/'. $menu->id .'/offers', $body);
+
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @return void
+     */
+    public function test_product_offer_can_be_stored(): void
+    {
+        $user = User::factory()->create();
+
+        $product = Product::factory()->create();
+
+        $body = [
+            'name' => 'test_product_name',
+            'percent' => 20.50,
+        ];
+
+        $response = $this->actingAs($user)
+            ->postJson('/api/products/'. $product->id .'/offers', $body);
 
         $response->assertStatus(200);
     }
@@ -72,14 +91,12 @@ class OfferTest extends TestCase
             ->patchJson('/api/offers/'. $offer->id, [
                 'name' => 'new_name',
                 'percent' => 10,
-                'product_id' => 2,
             ]);
 
         $new_offer = Offer::find($offer->id);
 
         $this->assertEquals('new_name', $new_offer->name);
         $this->assertEquals(10, $new_offer->percent);
-        $this->assertEquals(2, $new_offer->product_id);
 
         $response->assertStatus(200);
     }

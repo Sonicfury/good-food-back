@@ -19,7 +19,8 @@ class Offer extends Model
         'id',
         'name',
         'percent',
-        'product_id'
+        'offerable_type',
+        'offerable_id'
     ];
 
     /**

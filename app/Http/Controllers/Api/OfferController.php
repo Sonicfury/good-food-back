@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Offer\StoreOfferRequest;
 use App\Http\Requests\Offer\UpdateOfferRequest;
 use App\Http\Resources\OfferResource;
+use App\Models\Menu;
 use App\Models\Offer;
 use Illuminate\Http\JsonResponse;
 
@@ -24,14 +25,35 @@ class OfferController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param Menu $menu
      * @param StoreOfferRequest $request
      * @return JsonResponse
      */
-    public function store(StoreOfferRequest $request): JsonResponse
+    public function menu_store(Menu $menu, StoreOfferRequest $request): JsonResponse
     {
         $request->validated();
 
         $offer = Offer::create($request->all());
+
+        $menu->offers()->save($offer);
+
+        return $this->handleResponse(OfferResource::make($offer), 'Offer stored successfully.');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param Menu $menu
+     * @param StoreOfferRequest $request
+     * @return JsonResponse
+     */
+    public function product_store(Menu $menu, StoreOfferRequest $request): JsonResponse
+    {
+        $request->validated();
+
+        $offer = Offer::create($request->all());
+
+        $menu->offers()->save($offer);
 
         return $this->handleResponse(OfferResource::make($offer), 'Offer stored successfully.');
     }

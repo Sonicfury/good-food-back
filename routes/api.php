@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 /* --- Not connected user --- */
-
+Route::post('/menus/{menu}/offers', [OfferController::class, 'menu_store']);
 /* --- Authentication --- */
 Route::post('/register', [AuthController::class, 'register']);
 Route::match(['get', 'post'], '/login', [AuthController::class, 'login'])
@@ -34,18 +34,23 @@ Route::middleware('auth:sanctum')->group(function () {
 
     /* --- Restaurants --- */
     Route::post('/restaurants', [RestaurantController::class, 'store']);
-    Route::put('/restaurants/{id}', [RestaurantController::class, 'update']);
-    Route::delete('/restaurants/{id}', [RestaurantController::class, 'destroy']);
+    Route::match(['put', 'patch'], '/restaurants/{restaurant}', [RestaurantController::class, 'update']);
+    Route::delete('/restaurants/{restaurant}', [RestaurantController::class, 'destroy']);
 
     /* --- Categories --- */
     Route::apiResource('/categories', CategoryController::class);
 
     /* --- Products --- */
     Route::apiResource('/products', ProductController::class);
+    Route::post('/products/{product}/offers', [OfferController::class, 'product_store']);
 
     /* --- Offers --- */
-    Route::apiResource('/offers', OfferController::class);
+    Route::get('/offers', [OfferController::class, 'index']);
+    Route::get('/offers/{offer}', [OfferController::class, 'show']);
+    Route::match(['put', 'patch'], '/offers/{offer}', [OfferController::class, 'update']);
+    Route::delete('/offers/{offer}', [OfferController::class, 'destroy']);
 
     /* --- Menus --- */
     Route::apiResource('/menus', MenuController::class);
+
 });

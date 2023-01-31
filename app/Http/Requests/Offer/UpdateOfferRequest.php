@@ -25,8 +25,7 @@ class UpdateOfferRequest extends FormRequest
     {
         return [
             'name' => 'nullable|string|unique:offers|max:25',
-            'price' => 'nullable|numeric|between:1,99',
-            'product_id' => 'nullable|numeric',
+            'percent' => 'nullable|numeric|between:1,99',
         ];
     }
 }
