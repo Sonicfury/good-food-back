@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class AddressResource extends JsonResource
 {
     /**
      * @param $request
@@ -14,16 +14,15 @@ class UserResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'email' => $this->email,
-            'firstname' => $this->firstname,
-            'lastname' => $this->lastname,
+            'name' => $this->name,
+            'address1' => $this->address1,
+            'address2' => $this->address2,
+            'zipCode' => $this->zipCode,
+            'city' => $this->city,
             'phone' => $this->phone,
-            'birthDate' => $this->birthDate,
+            'note' => $this->note,
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,
-            'disabledAt' => $this->disable_at,
-            'roles' => RoleResource::collection($this->roles),
-            'adresses' => AddressResource::collection($this->addresses),
         ];
     }
 }
