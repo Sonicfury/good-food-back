@@ -47,8 +47,7 @@ class UserTest extends TestCase
             'email' => 'old@example.com',
             'firstname' => 'old_firstname',
             'lastname' => 'old_lastname',
-            'primaryPhone' => '0650505050',
-            'secondaryPhone' => '0350505050',
+            'phone' => '0650505050',
             'birthDate' => '1995-02-01',
         ]);
 
@@ -59,8 +58,7 @@ class UserTest extends TestCase
                 'email' => 'new@example.com',
                 'firstname' => 'new_firstname',
                 'lastname' => 'new_lastname',
-                'primaryPhone' => '0750505050',
-                'secondaryPhone' => '0250505050',
+                'phone' => '0750505050',
                 'birthDate' => '01-02-1990',
             ]);
 
@@ -69,8 +67,7 @@ class UserTest extends TestCase
         $this->assertEquals('new@example.com', $new_user->email);
         $this->assertEquals('new_firstname', $new_user->firstname);
         $this->assertEquals('new_lastname', $new_user->lastname);
-        $this->assertEquals('0750505050', $new_user->primaryPhone);
-        $this->assertEquals('0250505050', $new_user->secondaryPhone);
+        $this->assertEquals('0750505050', $new_user->phone);
         $this->assertEquals('1990-02-01', $new_user->birthDate);
 
         $response->assertStatus(200);

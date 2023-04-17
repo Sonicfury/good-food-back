@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\Address;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class UpdateAddressRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,14 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'nullable|string|email|unique:users',
-            'firstname' => 'nullable|string|min:1|max:25',
-            'lastname' => 'nullable|string|min:1|max:25',
+            'name' => 'nullable|string|min:1|max:25',
+            'address1' => 'nullable|string|min:1|max:255',
+            'address2' => 'nullable|string|min:1|max:255',
+            'zipCode' => 'nullable|string|min:2|max:5',
+            'city' => 'nullable|string|min:1|max:25',
+            'note' => 'nullable|string|min:1|max:255',
             'phone' => ['nullable', 'regex:/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/'],
-            'birthDate' => 'nullable|date',
+            'user_id' => 'nullable|numeric',
         ];
     }
 }

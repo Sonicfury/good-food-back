@@ -20,8 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('firstname')->nullable();
             $table->string('lastname')->nullable();
-            $table->string('primaryPhone')->nullable();
-            $table->string('secondaryPhone')->nullable();
+            $table->string('phone')->nullable();
             $table->date('birthDate')->nullable();
             $table->dateTime('disabled_at')->nullable();
             $table->rememberToken();
