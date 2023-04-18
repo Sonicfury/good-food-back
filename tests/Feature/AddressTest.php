@@ -33,6 +33,7 @@ class AddressTest extends TestCase
 
         $body = [
             'name' => 'test1',
+            'main' => false,
             'address1' => 'rue test1',
             'zipCode' => '62410',
             'city' => 'wingles',
@@ -72,6 +73,7 @@ class AddressTest extends TestCase
         $response = $this->actingAs($user)
             ->patchJson('/api/addresses/'. $address->id, [
                 'name' => 'test',
+                'main' => true,
                 'address1' => 'rue test',
                 'zipCode' => '62410',
                 'city' => 'wingles',
@@ -82,7 +84,7 @@ class AddressTest extends TestCase
         $new_address = Address::find($address->id);
 
         $this->assertEquals('test', $new_address->name);
-        $this->assertEquals('rue test', $new_address->address1);
+        $this->assertEquals(true, $new_address->address1);
         $this->assertEquals('62410', $new_address->zipCode);
         $this->assertEquals('wingles', $new_address->city);
         $this->assertEquals('lorem ipsum', $new_address->note);

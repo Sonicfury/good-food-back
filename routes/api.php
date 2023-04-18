@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AddressController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\OrderedController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\OfferController;
 use App\Http\Controllers\Api\RestaurantController;
@@ -56,6 +57,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/orders/{order}', [OrderController::class, 'destroy']);
     Route::post('/orders', [OrderController::class, 'store']);
 
+    /* --- Ordereds --- */
+    Route::apiResource('/ordereds', OrderedController::class);
+    Route::get('/orders/{order}/ordereds', [OrderedController::class, 'order_ordereds']);
 
     /* --- Categories --- */
     Route::apiResource('/categories', CategoryController::class);
