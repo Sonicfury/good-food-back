@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AddressController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\OrderController;
@@ -33,6 +34,13 @@ Route::middleware('auth:sanctum')->group(function () {
     /* --- Users --- */
     Route::apiResource('/users', UserController::class);
 
+    /* --- Addresses --- */
+    Route::get('/addresses', [AddressController::class, 'index']);
+    Route::get('/addresses/{address}', [AddressController::class, 'show']);
+    Route::match(['put', 'patch'], '/addresses/{address}', [AddressController::class, 'update']);
+    Route::delete('/addresses/{address}', [AddressController::class, 'destroy']);
+    Route::post('/users/{user}/addresses', [AddressController::class, 'store']);
+
     /* --- Restaurants --- */
     Route::post('/restaurants', [RestaurantController::class, 'store']);
     Route::match(['put', 'patch'], '/restaurants/{restaurant}', [RestaurantController::class, 'update']);
@@ -54,15 +62,16 @@ Route::middleware('auth:sanctum')->group(function () {
 
     /* --- Products --- */
     Route::apiResource('/products', ProductController::class);
-    Route::post('/products/{product}/offers', [OfferController::class, 'product_store']);
+
+    /* --- Menus --- */
+    Route::apiResource('/menus', MenuController::class);
 
     /* --- Offers --- */
     Route::get('/offers', [OfferController::class, 'index']);
     Route::get('/offers/{offer}', [OfferController::class, 'show']);
     Route::match(['put', 'patch'], '/offers/{offer}', [OfferController::class, 'update']);
     Route::delete('/offers/{offer}', [OfferController::class, 'destroy']);
-
-    /* --- Menus --- */
-    Route::apiResource('/menus', MenuController::class);
+    Route::post('/products/{product}/offers', [OfferController::class, 'product_store']);
+    Route::post('/menus/{menu}/offers', [OfferController::class, 'menu_store']);
 
 });
