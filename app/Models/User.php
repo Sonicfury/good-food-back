@@ -55,4 +55,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Address::class);
     }
+
+    /**
+     * Get the products for the blog post.
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
 }

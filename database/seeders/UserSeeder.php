@@ -16,7 +16,15 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::factory()
-            ->count(5)
+            ->count(10)
             ->create();
+
+        $admin = User::find(1);
+        $deliveryman = User::find(2);
+        $employee = User::find(3);
+
+        $admin->assignRole('admin');
+        $deliveryman->assignRole('deliveryman');
+        $employee->assignRole('employee');
     }
 }

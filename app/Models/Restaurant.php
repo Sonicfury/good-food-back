@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Restaurant extends Model
 {
@@ -27,4 +28,12 @@ class Restaurant extends Model
         'secondaryPhone',
         'disabled_at',
     ];
+
+    /**
+     * Get the products for the blog post.
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
 }
