@@ -25,6 +25,7 @@ class StoreAddressRequest extends FormRequest
     {
         return [
             'name' => 'string|min:1|max:25',
+            'main' => 'boolean',
             'address1' => 'string|min:1|max:255',
             'address2' => 'nullable|string|min:1|max:255',
             'zipCode' => 'string|min:2|max:5',

@@ -19,6 +19,7 @@ class AddressFactory extends Factory
     {
         return [
             'name' => fake()->name,
+            'main' => false,
             'address1' => fake()->streetAddress,
             'zipCode' => fake()->postcode,
             'city' => fake()->city,

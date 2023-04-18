@@ -25,6 +25,7 @@ class UpdateAddressRequest extends FormRequest
     {
         return [
             'name' => 'nullable|string|min:1|max:25',
+            'main' => 'nullable|boolean',
             'address1' => 'nullable|string|min:1|max:255',
             'address2' => 'nullable|string|min:1|max:255',
             'zipCode' => 'nullable|string|min:2|max:5',
