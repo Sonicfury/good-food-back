@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\MenuController;
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\OfferController;
 use App\Http\Controllers\Api\RestaurantController;
@@ -36,6 +37,17 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/restaurants', [RestaurantController::class, 'store']);
     Route::match(['put', 'patch'], '/restaurants/{restaurant}', [RestaurantController::class, 'update']);
     Route::delete('/restaurants/{restaurant}', [RestaurantController::class, 'destroy']);
+
+    /* --- Orders --- */
+    Route::get('/orders', [OrderController::class, 'index']);
+    Route::get('/customers/{user}/orders', [OrderController::class, 'customer_orders']);
+    Route::get('/restaurants/{restaurant}/orders', [OrderController::class, 'restaurant_orders']);
+    Route::get('/employees/{user}/orders', [OrderController::class, 'employee_orders']);
+    Route::get('/orders/{order}', [OrderController::class, 'show']);
+    Route::match(['put', 'patch'], '/orders/{order}', [OrderController::class, 'update']);
+    Route::delete('/orders/{order}', [OrderController::class, 'destroy']);
+    Route::post('/orders', [OrderController::class, 'store']);
+
 
     /* --- Categories --- */
     Route::apiResource('/categories', CategoryController::class);

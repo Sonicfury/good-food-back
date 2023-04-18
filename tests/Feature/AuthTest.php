@@ -21,7 +21,7 @@ class AuthTest extends TestCase
             'password' => '1234azer',
         ]);
 
-        $this->assertCount(6, User::all());
+        $this->assertCount(11, User::all());
 
         $response->assertStatus(200);
     }
