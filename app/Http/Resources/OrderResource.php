@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Ordered;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -19,10 +20,12 @@ class OrderResource extends JsonResource
         return [
             'id' => $this->id,
             'state' => $this->state,
-            'customer' => $this->customer_id,
-            'restaurant' => $this->restaurant,
-            'employee_id' => $this->employee_id,
+            'isTakeaway' => $this->isTakeaway,
+            'total' => $this->total,
             'ordered' => OrderedResource::collection($this->ordereds),
+            'customer' => UserResource::make(User::find($this->customer_id)),
+            'restaurant' => $this->restaurant,
+            'employee' => $this->employee_id,
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,
         ];

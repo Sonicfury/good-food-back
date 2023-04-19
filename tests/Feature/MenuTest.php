@@ -29,6 +29,7 @@ class MenuTest extends TestCase
     public function test_menu_can_be_stored(): void
     {
         $user = User::factory()->create();
+        $user->assignRole('admin');
 
         $body = [
             'name' => 'test_name',
@@ -64,6 +65,7 @@ class MenuTest extends TestCase
         $menu = Menu::factory()->create();
 
         $user = User::factory()->create();
+        $user->assignRole('admin');
 
         $response = $this->actingAs($user)
             ->patchJson('/api/menus/'. $menu->id, [
@@ -87,6 +89,7 @@ class MenuTest extends TestCase
         $menu = Menu::factory()->create();
 
         $user = User::factory()->create();
+        $user->assignRole('admin');
 
         $response = $this->actingAs($user)
             ->deleteJson('/api/menus/'. $menu->id);

@@ -8,6 +8,7 @@ use App\Models\Offer;
 use App\Models\Product;
 use App\Models\User;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ProductTest extends TestCase
@@ -33,6 +34,7 @@ class ProductTest extends TestCase
         $category = Category::factory()->create();
 
         $user = User::factory()->create();
+        $user->assignRole('admin');
 
         $body = [
             'name' => 'test_name',
@@ -54,6 +56,7 @@ class ProductTest extends TestCase
         $product = Product::factory()->create();
 
         $user = User::factory()->create();
+        $user->assignRole('admin');
 
         $response = $this->actingAs($user)
             ->getJson('/api/products/'. $product->id);
@@ -69,6 +72,7 @@ class ProductTest extends TestCase
         $product = Product::factory()->create();
 
         $user = User::factory()->create();
+        $user->assignRole('admin');
 
         $response = $this->actingAs($user)
             ->patchJson('/api/products/'. $product->id, [
@@ -94,6 +98,7 @@ class ProductTest extends TestCase
         $product = Product::factory()->create();
 
         $user = User::factory()->create();
+        $user->assignRole('admin');
 
         $response = $this->actingAs($user)
             ->deleteJson('/api/products/'. $product->id);

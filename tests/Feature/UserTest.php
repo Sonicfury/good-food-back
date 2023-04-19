@@ -16,6 +16,7 @@ class UserTest extends TestCase
      public function test_user_can_be_display_users(): void
     {
         $user = User::factory()->create();
+        $user->assignRole('admin');
 
         $response = $this->actingAs($user)
             ->getJson('/api/users');
@@ -29,6 +30,7 @@ class UserTest extends TestCase
     public function test_user_can_be_display_user(): void
     {
         $user = User::factory()->create();
+        $user->assignRole('customer');
 
         $response = $this->actingAs($user)
             ->getJson('/api/users/'. $user->id);
@@ -50,6 +52,7 @@ class UserTest extends TestCase
             'phone' => '0650505050',
             'birthDate' => '1995-02-01',
         ]);
+        $user->assignRole('customer');
 
         $user = User::find($user->id);
 

@@ -15,6 +15,7 @@ class CategoryTest extends TestCase
     public function test_category_can_be_display_categories(): void
     {
         $user = User::factory()->create();
+        $user->assignRole('customer');
 
         $response = $this->actingAs($user)
             ->get('/api/categories');
@@ -28,6 +29,7 @@ class CategoryTest extends TestCase
     public function test_category_can_be_stored(): void
     {
         $user = User::factory()->create();
+        $user->assignRole('admin');
 
         $body = [
             'name' => 'test_name',
@@ -47,6 +49,7 @@ class CategoryTest extends TestCase
         $category = Category::factory()->create();
 
         $user = User::factory()->create();
+        $user->assignRole('customer');
 
         $response = $this->actingAs($user)
             ->getJson('/api/categories/'. $category->id);
@@ -62,6 +65,7 @@ class CategoryTest extends TestCase
         $category = Category::factory()->create();
 
         $user = User::factory()->create();
+        $user->assignRole('admin');
 
         $response = $this->actingAs($user)
             ->patchJson('/api/categories/'. $category->id, [
@@ -83,6 +87,7 @@ class CategoryTest extends TestCase
         $category = Category::factory()->create();
 
         $user = User::factory()->create();
+        $user->assignRole('admin');
 
         $response = $this->actingAs($user)
             ->deleteJson('/api/categories/'. $category->id);

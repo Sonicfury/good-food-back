@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Facades\Distance;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Restaurant\UpdateRequest;
+use App\Http\Requests\Restaurant\StoreRestaurantRequest;
+use App\Http\Requests\Restaurant\UpdateRestaurantRequest;
 use App\Http\Resources\RestaurantResource;
 use App\Models\Restaurant;
 use Illuminate\Http\JsonResponse;
@@ -26,12 +27,16 @@ class RestaurantController extends Controller
     /**
      * Store the specified restaurant.
      *
-     * @param UpdateRequest $request
-     * @return void
+     * @param StoreRestaurantRequest $request
+     * @return JsonResponse
      */
-    public function store(UpdateRequest $request): void
+    public function store(StoreRestaurantRequest $request): JsonResponse
     {
-        //
+        $request->validated();
+
+        $restaurant = Restaurant::create($request->all());
+
+        return $this->handleResponse(RestaurantResource::make($restaurant), 'Restaurant stored successfully.');
     }
 
     /**
@@ -48,24 +53,29 @@ class RestaurantController extends Controller
     /**
      * Update the specified restaurant.
      *
-     * @param UpdateRequest $request
+     * @param UpdateRestaurantRequest $request
      * @param Restaurant $restaurant
-     * @return void
+     * @return JsonResponse
      */
-    public function update(UpdateRequest $request, Restaurant $restaurant): void
+    public function update(UpdateRestaurantRequest $request, Restaurant $restaurant): JsonResponse
     {
-        //
+        $request->validated();
+
+        $restaurant->update($request->all());
+
+        return $this->handleResponse(RestaurantResource::make($restaurant), 'Restaurant updated successfully.');
     }
 
     /**
      * Destroy the specified restaurant.
      *
-     * @param UpdateRequest $request
-     * @param Restaurant $restaurant
-     * @return void
+     * @param Restaurant $product
+     * @return JsonResponse
      */
-    public function destroy(UpdateRequest $request, Restaurant $restaurant): void
+    public function destroy(Restaurant $product): JsonResponse
     {
-        //
+        $product->delete();
+
+        return $this->handleResponse([], 'Restaurant deleted successfully.');
     }
 }
