@@ -29,6 +29,7 @@ class OfferTest extends TestCase
     public function test_menu_offer_can_be_stored(): void
     {
         $user = User::factory()->create();
+        $user->assignRole('admin');
 
         $menu = Menu::factory()->create();
 
@@ -49,6 +50,7 @@ class OfferTest extends TestCase
     public function test_product_offer_can_be_stored(): void
     {
         $user = User::factory()->create();
+        $user->assignRole('admin');
 
         $product = Product::factory()->create();
 
@@ -86,6 +88,7 @@ class OfferTest extends TestCase
         $offer = Offer::factory()->create();
 
         $user = User::factory()->create();
+        $user->assignRole('admin');
 
         $response = $this->actingAs($user)
             ->patchJson('/api/offers/'. $offer->id, [
@@ -109,6 +112,8 @@ class OfferTest extends TestCase
         $offer = Offer::factory()->create();
 
         $user = User::factory()->create();
+        $user->assignRole('admin');
+
 
         $response = $this->actingAs($user)
             ->deleteJson('/api/offers/'. $offer->id);

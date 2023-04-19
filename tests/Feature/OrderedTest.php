@@ -7,8 +7,6 @@ use App\Models\Order;
 use App\Models\Ordered;
 use App\Models\Product;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class OrderedTest extends TestCase
@@ -19,6 +17,7 @@ class OrderedTest extends TestCase
     public function test_ordered_can_be_display_ordereds(): void
     {
         $user = User::factory()->create();
+        $user->assignRole('admin');
 
         $response = $this->actingAs($user)
             ->getJson('/api/ordereds');
@@ -32,6 +31,8 @@ class OrderedTest extends TestCase
     public function test_ordered_can_be_display_order_ordereds(): void
     {
         $user = User::factory()->create();
+        $user->assignRole('customer');
+
         $order = Order::factory()->create();
 
         Ordered::factory()->create(['order_id' => $order->id]);
@@ -51,6 +52,7 @@ class OrderedTest extends TestCase
         $menu = Menu::factory()->create();
 
         $user = User::factory()->create();
+        $user->assignRole('customer');
 
         $body = [
             'comment' => 'comment test',
@@ -74,6 +76,7 @@ class OrderedTest extends TestCase
         $product = Product::factory()->create();
 
         $user = User::factory()->create();
+        $user->assignRole('customer');
 
         $body = [
             'comment' => 'comment test',
@@ -96,6 +99,7 @@ class OrderedTest extends TestCase
         $ordered = Ordered::factory()->create();
 
         $user = User::factory()->create();
+        $user->assignRole('customer');
 
         $response = $this->actingAs($user)
             ->getJson('/api/ordereds/'. $ordered->id);
@@ -113,6 +117,7 @@ class OrderedTest extends TestCase
         $product = Product::factory()->create();
 
         $user = User::factory()->create();
+        $user->assignRole('customer');
 
         $response = $this->actingAs($user)
             ->patchJson('/api/ordereds/'. $ordered->id, [
@@ -140,6 +145,7 @@ class OrderedTest extends TestCase
         $ordered = Ordered::factory()->create();
 
         $user = User::factory()->create();
+        $user->assignRole('customer');
 
         $response = $this->actingAs($user)
             ->deleteJson('/api/ordereds/'. $ordered->id);

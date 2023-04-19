@@ -19,6 +19,8 @@ class Order extends Model
     protected $fillable = [
         'id',
         'state',
+        'isTakeaway',
+        'total',
         'customer_id',
         'restaurant_id',
         'employee_id'

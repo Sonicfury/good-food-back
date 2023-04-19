@@ -15,6 +15,7 @@ class OrderTest extends TestCase
     public function test_order_can_be_display_orders(): void
     {
         $user = User::factory()->create();
+        $user->assignRole('admin');
 
         $response = $this->actingAs($user)
             ->getJson('/api/orders');
@@ -28,6 +29,8 @@ class OrderTest extends TestCase
     public function test_order_can_be_display_customer_orders(): void
     {
         $user = User::factory()->create();
+        $user->assignRole('customer');
+
         $customer = User::factory()->create();
 
         Order::factory()->create(['customer_id' => $customer->id]);
@@ -44,6 +47,8 @@ class OrderTest extends TestCase
     public function test_order_can_be_display_restaurant_orders(): void
     {
         $user = User::factory()->create();
+        $user->assignRole('admin');
+
         $restaurant = Restaurant::factory()->create();
 
         Order::factory()->create(['restaurant_id' => $restaurant->id]);
@@ -60,6 +65,8 @@ class OrderTest extends TestCase
     public function test_order_can_be_display_employee_orders(): void
     {
         $user = User::factory()->create();
+        $user->assignRole('admin');
+
         $employee = User::factory()->create();
 
         Order::factory()->create(['employee_id' => $employee->id]);
@@ -80,9 +87,12 @@ class OrderTest extends TestCase
         $employee = User::factory()->create();
 
         $user = User::factory()->create();
+        $user->assignRole('customer');
 
         $body = [
             'state' => 'validée',
+            'isTakeaway' => true,
+            'total' =>  16.99,
             'customer_id' => $customer->id,
             'restaurant_id' => $restaurant->id,
             'employee_id' => $employee->id,
@@ -102,6 +112,7 @@ class OrderTest extends TestCase
         $order = Order::factory()->create();
 
         $user = User::factory()->create();
+        $user->assignRole('customer');
 
         $response = $this->actingAs($user)
             ->getJson('/api/orders/'. $order->id);
@@ -117,6 +128,7 @@ class OrderTest extends TestCase
         $order = Order::factory()->create();
 
         $user = User::factory()->create();
+        $user->assignRole('customer');
 
         $response = $this->actingAs($user)
             ->patchJson('/api/orders/'. $order->id, [
@@ -144,6 +156,7 @@ class OrderTest extends TestCase
         $order = Order::factory()->create();
 
         $user = User::factory()->create();
+        $user->assignRole('customer');
 
         $response = $this->actingAs($user)
             ->deleteJson('/api/orders/'. $order->id);

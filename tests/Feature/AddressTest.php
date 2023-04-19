@@ -5,10 +5,13 @@ namespace Tests\Feature;
 use App\Models\Address;
 use App\Models\User;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class AddressTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * @return void
      */
@@ -17,6 +20,7 @@ class AddressTest extends TestCase
         Address::factory()->create();
 
         $user = User::factory()->create();
+        $user->assignRole('admin');
 
         $response = $this->actingAs($user)
             ->getJson('/api/addresses');
@@ -30,6 +34,7 @@ class AddressTest extends TestCase
     public function test_address_can_be_stored(): void
     {
         $user = User::factory()->create();
+        $user->assignRole('admin');
 
         $body = [
             'name' => 'test1',
@@ -54,6 +59,7 @@ class AddressTest extends TestCase
         $address = Address::factory()->create();
 
         $user = User::factory()->create();
+        $user->assignRole('customer');
 
         $response = $this->actingAs($user)
             ->getJson('/api/addresses/'. $address->id);
@@ -69,6 +75,7 @@ class AddressTest extends TestCase
         $address = Address::factory()->create();
 
         $user = User::factory()->create();
+        $user->assignRole('customer');
 
         $response = $this->actingAs($user)
             ->patchJson('/api/addresses/'. $address->id, [
@@ -101,6 +108,7 @@ class AddressTest extends TestCase
         $address = Address::factory()->create();
 
         $user = User::factory()->create();
+        $user->assignRole('customer');
 
         $response = $this->actingAs($user)
             ->deleteJson('/api/addresses/'. $address->id);

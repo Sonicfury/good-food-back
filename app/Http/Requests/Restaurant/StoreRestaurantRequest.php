@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Order;
+namespace App\Http\Requests\Restaurant;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreOrderRequest extends FormRequest
+class StoreRestaurantRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,11 @@ class StoreOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'state' => 'string|max:25',
-            'isTakeaway' => 'boolean',
-            'total' => 'numeric|between:0,9999999999.99',
-            'customer_id' => 'numeric',
-            'restaurant_id' => 'numeric',
-            'employee_id' => 'numeric',
+            'name' => 'string|max:25',
+            'address1' => 'string',
+            'zipCode' => 'numeric|max:99999',
+            'city' => 'string',
+            'primaryPhone' => 'regex:/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/',
         ];
     }
 }

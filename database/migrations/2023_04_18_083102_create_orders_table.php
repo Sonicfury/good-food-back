@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->boolean('isTakeaway');
+            $table->float('total');
             $table->string('state');
             $table->unsignedBigInteger('customer_id');
             $table->foreign('customer_id')
