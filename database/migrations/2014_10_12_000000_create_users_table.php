@@ -23,6 +23,11 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->date('birthDate')->nullable();
             $table->dateTime('disabled_at')->nullable();
+            $table->unsignedBigInteger('restaurant_id')->nullable();
+            $table->foreign('restaurant_id')
+                ->references('id')
+                ->on('restaurants')
+                ->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });
