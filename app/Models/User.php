@@ -26,6 +26,7 @@ class User extends Authenticatable
         'lastname',
         'phone',
         'birthDate',
+        'restaurant_id',
         'disabled_at',
     ];
 

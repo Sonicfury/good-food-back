@@ -29,6 +29,7 @@ class UpdateRequest extends FormRequest
             'lastname' => 'nullable|string|min:1|max:25',
             'phone' => ['nullable', 'regex:/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/'],
             'birthDate' => 'nullable|date',
+            'restaurant_id' => 'nullable|numeric',
         ];
     }
 }
