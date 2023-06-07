@@ -23,12 +23,17 @@ return new class extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
+            $table->unsignedBigInteger('addresses_id');
+            $table->foreign('addresses_id')
+                ->references('id')
+                ->on('addresses')
+                ->onDelete('cascade');
             $table->unsignedBigInteger('restaurant_id');
             $table->foreign('restaurant_id')
                 ->references('id')
                 ->on('restaurants')
                 ->onDelete('cascade');
-            $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('employee_id')->nullable();
             $table->foreign('employee_id')
                 ->references('id')
                 ->on('users')

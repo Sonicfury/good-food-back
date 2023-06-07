@@ -14,8 +14,12 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        Product::factory()
+        $products = Product::factory()
             ->count(15)
             ->create();
+
+        foreach ($products as $product){
+            $product->assignMedia(["product_image"]);
+        }
     }
 }

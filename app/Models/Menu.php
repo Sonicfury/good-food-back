@@ -4,9 +4,12 @@ namespace App\Models;
 
 use App\Models\Traits\hasOffer;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Ogrre\Media\Traits\HasMedia;
 
 class Menu extends HasOffer
 {
+    use HasMedia;
+
     /**
      * The attributes that are mass assignable.
      *

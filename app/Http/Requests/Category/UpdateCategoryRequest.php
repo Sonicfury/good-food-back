@@ -24,7 +24,8 @@ class UpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'nullable|string|unique:categories|max:25'
+            'name' => 'nullable|string|unique:categories|max:25',
+            'image' => 'nullable|file',
         ];
     }
 }

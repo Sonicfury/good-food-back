@@ -21,6 +21,7 @@ class OrderFactory extends Factory
             'state' => rand(0, 4),
             'isTakeaway' => true,
             'total' => rand(15.01, 50.99),
+            'addresses_id' => rand(1, 10),
             'customer_id' => rand(4, 10),
             'restaurant_id' => rand(1, 5),
             'employee_id' => 3,

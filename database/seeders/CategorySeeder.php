@@ -14,8 +14,12 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        Category::factory()
+        $categories = Category::factory()
             ->count(5)
             ->create();
+
+        foreach ($categories as $category){
+            $category->assignMedia(["category_image"]);
+        }
     }
 }
