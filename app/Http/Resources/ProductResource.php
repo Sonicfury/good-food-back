@@ -20,6 +20,7 @@ class ProductResource extends JsonResource
             'name' => $this->name,
             'price' => $this->price,
             'category' => CategoryResource::make($this->category),
+            'image' => $this->getMediaFile('product_image'),
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,
         ];

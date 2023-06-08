@@ -14,8 +14,12 @@ class MenuSeeder extends Seeder
      */
     public function run(): void
     {
-        Menu::factory()
+        $menus = Menu::factory()
             ->count(15)
             ->create();
+
+        foreach ($menus as $menu){
+            $menu->assignMedia(["menu_image"]);
+        }
     }
 }

@@ -33,6 +33,8 @@ class MenuController extends Controller
 
         $menu = Menu::create($request->all());
 
+        $menu->addMediaFile($request->file('image'), "menu_image");
+
         return $this->handleResponse(MenuResource::make($menu), 'Menu stored successfully.');
     }
 
@@ -59,6 +61,8 @@ class MenuController extends Controller
         $request->validated();
 
         $menu->update($request->all());
+
+        $menu->updateMediaFile($request->file('image'), "menu_image");
 
         return $this->handleResponse(MenuResource::make($menu), 'Menu updated successfully.');
     }

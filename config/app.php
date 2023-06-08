@@ -185,7 +185,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Ogrre\Media\MediaServiceProvider::class,
         /*
          * Application Service Providers...
          */

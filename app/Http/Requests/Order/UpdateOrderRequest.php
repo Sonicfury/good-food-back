@@ -28,6 +28,7 @@ class UpdateOrderRequest extends FormRequest
             'isTakeaway' => 'nullable|boolean',
             'total' => 'nullable|numeric|between:0,9999999999.99',
             'customer_id' => 'nullable|numeric',
+            'address_id' => 'nullable|numeric',
             'restaurant_id' => 'nullable|numeric',
             'employee_id' => 'nullable|numeric',
         ];
