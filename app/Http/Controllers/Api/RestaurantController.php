@@ -69,12 +69,12 @@ class RestaurantController extends Controller
     /**
      * Destroy the specified restaurant.
      *
-     * @param Restaurant $product
+     * @param Restaurant $restaurant
      * @return JsonResponse
      */
-    public function destroy(Restaurant $product): JsonResponse
+    public function destroy(Restaurant $restaurant): JsonResponse
     {
-        $product->delete();
+        $restaurant->delete();
 
         return $this->handleResponse([], 'Restaurant deleted successfully.');
     }

@@ -18,7 +18,8 @@ class Menu extends HasOffer
     protected $fillable = [
         'id',
         'name',
-        'price'
+        'price',
+        'image'
     ];
 
     /**
