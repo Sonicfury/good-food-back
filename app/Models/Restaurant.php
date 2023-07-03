@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Ogrre\Media\Traits\HasMedia;
 
 class Restaurant extends Model
 {
-    use HasFactory;
+    use HasFactory, HasMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -24,8 +25,8 @@ class Restaurant extends Model
         'city',
         'lat',
         'long',
-        'primaryPhone',
-        'secondaryPhone',
+        'phone',
+        'image',
         'disabled_at',
     ];
 

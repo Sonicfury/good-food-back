@@ -18,7 +18,7 @@ class MenuFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name,
+            'name' => fake()->word,
             'price' => rand(1.01, 30.999999),
         ];
     }

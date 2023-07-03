@@ -18,7 +18,7 @@ class OfferFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name,
+            'name' => fake()->word,
             'percent' => rand(5, 55),
         ];
     }

@@ -25,7 +25,7 @@ class UpdateCategoryRequest extends FormRequest
     {
         return [
             'name' => 'nullable|string|unique:categories|max:25',
-            'image' => 'nullable|file',
+            'image' => 'nullable',
         ];
     }
 }

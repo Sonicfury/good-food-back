@@ -9,7 +9,7 @@ use Ogrre\Media\Traits\HasMedia;
 
 class Category extends Model
 {
-    use HasFactory, hasMedia;
+    use HasFactory, HasMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -19,6 +19,7 @@ class Category extends Model
     protected $fillable = [
         'id',
         'name',
+        'image'
     ];
 
     /**

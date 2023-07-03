@@ -25,7 +25,7 @@ class StoreCategoryRequest extends FormRequest
     {
         return [
             'name' => 'string|unique:categories|max:25',
-            'image' => 'nullable|file',
+            'image' => 'nullable',
         ];
     }
 }

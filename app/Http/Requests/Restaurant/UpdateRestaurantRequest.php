@@ -29,6 +29,7 @@ class UpdateRestaurantRequest extends FormRequest
             'zipCode' => 'nullable|numeric|max:99999',
             'city' => 'nullable|string',
             'primaryPhone' => ['nullable', 'regex:/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/'],
+            'image' => 'nullable',
         ];
     }
 }

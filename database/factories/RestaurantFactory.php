@@ -18,7 +18,7 @@ class RestaurantFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name,
+            'name' => fake()->company,
             'address1' => fake()->address,
             'zipCode' => rand(10000, 99999),
             'lat' => 50 + rand(0, 1000) / 1000,

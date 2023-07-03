@@ -22,8 +22,7 @@ return new class extends Migration
             $table->string('city');
             $table->decimal('lat', 12, 10)->nullable();
             $table->decimal('long', 12, 10)->nullable();
-            $table->string('primaryPhone');
-            $table->string('secondaryPhone')->nullable();
+            $table->string('phone');
             $table->dateTime('disabled_at')->nullable();
             $table->timestamps();
         });

@@ -33,8 +33,6 @@ class ProductController extends Controller
 
         $product = Product::create($request->all());
 
-        dd($request->file('image'));
-
         $product->addMediaFile($request->file('image'), "product_image");
 
         return $this->handleResponse(ProductResource::make($product), 'Product stored successfully.');
@@ -60,12 +58,9 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product): JsonResponse
     {
-
         $request->validated();
 
         $product->update($request->all());
-
-        $product->updateMediaFile($request->file('image'), "product_image");
 
         return $this->handleResponse(ProductResource::make($product), 'Product updated successfully.');
     }

@@ -19,6 +19,7 @@ class Product extends hasOffer
         'id',
         'name',
         'price',
+        'image',
         'category_id'
     ];
 
