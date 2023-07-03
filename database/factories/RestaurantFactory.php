@@ -24,7 +24,7 @@ class RestaurantFactory extends Factory
             'lat' => 50 + rand(0, 1000) / 1000,
             'long' => 2 + rand(0, 1000) / 1000,
             'city' => fake()->city,
-            'primaryPhone' => fake()->phoneNumber,
+            'phone' => fake()->phoneNumber,
         ];
     }
 }
