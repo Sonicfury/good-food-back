@@ -34,7 +34,9 @@ class CategoryController extends Controller
 
         $category = Category::create($request->all());
 
-        $category->addMediaFile($request->file('image'), "category_image");
+        if ($request->file('image')){
+            $category->addMediaFile($request->file('image'), "category_image");
+        }
 
         return $this->handleResponse(CategoryResource::make($category), 'Category stored successfully.');
     }
@@ -62,8 +64,6 @@ class CategoryController extends Controller
         $request->validated();
 
         $category->update($request->all());
-
-        $category->updateMediaFile($request->file('image'), "category_image");
 
         return $this->handleResponse(CategoryResource::make($category), 'Category updated successfully.');
     }

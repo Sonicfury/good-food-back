@@ -24,7 +24,7 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'string|unique:categories|max:25',
+            'name' => 'string',
             'image' => 'nullable',
         ];
     }

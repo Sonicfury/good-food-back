@@ -33,7 +33,9 @@ class ProductController extends Controller
 
         $product = Product::create($request->all());
 
-        $product->addMediaFile($request->file('image'), "product_image");
+        if ($request->file('image')) {
+            $product->addMediaFile($request->file('image'), "product_image");
+        }
 
         return $this->handleResponse(ProductResource::make($product), 'Product stored successfully.');
     }

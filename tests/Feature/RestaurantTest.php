@@ -46,7 +46,7 @@ class RestaurantTest extends TestCase
             'lat' => 50 + rand(0, 1000) / 1000,
             'long' => 2 + rand(0, 1000) / 1000,
             'city' => fake()->city,
-            'primaryPhone' => '0650505050',
+            'phone' => '0650505050',
         ];
 
         $response = $this->actingAs($user)
@@ -89,7 +89,7 @@ class RestaurantTest extends TestCase
                 'lat' => 50.9999990000,
                 'long' => 3.9999990000,
                 'city' => 'test city',
-                'primaryPhone' => '0650505050',
+                'phone' => '0650505050',
             ]);
 
         $new_restaurant = Restaurant::find($restaurant->id);
@@ -100,7 +100,7 @@ class RestaurantTest extends TestCase
         $this->assertEquals(50.999999, $new_restaurant->lat);
         $this->assertEquals(3.999999, $new_restaurant->long);
         $this->assertEquals('test city', $new_restaurant->city);
-        $this->assertEquals('0650505050', $new_restaurant->primaryPhone);
+        $this->assertEquals('0650505050', $new_restaurant->phone);
 
         $response->assertStatus(200);
     }

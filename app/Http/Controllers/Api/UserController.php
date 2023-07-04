@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User\UpdateRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Carbon\Carbon;
@@ -24,11 +24,18 @@ class UserController extends Controller
     /**
      * Store the specified user.
      *
-     * @param UpdateRequest $request
+     * @param UpdateUserRequest $request
+     * @return JsonResponse
      */
-    public function store(UpdateRequest $request)
+    public function store(UpdateUserRequest $request)
     {
-        //
+        $request->validated();
+
+        $user = User::create($request->all());
+
+        $request->role ?? $user->assignRole($request->role);
+
+        return $this->handleResponse(UserResource::make($user), 'User stored successfully.');
     }
 
     /**
@@ -43,11 +50,11 @@ class UserController extends Controller
     }
 
     /**
-     * @param UpdateRequest $request
+     * @param UpdateUserRequest $request
      * @param User $user
      * @return JsonResponse
      */
-    public function update(UpdateRequest $request, User $user): JsonResponse
+    public function update(UpdateUserRequest $request, User $user): JsonResponse
     {
         $request->validated();
 
@@ -58,5 +65,18 @@ class UserController extends Controller
         $user->update($data);
 
         return $this->handleResponse(UserResource::make($user), 'User updated successfully.');
+    }
+
+    /**
+     * Destroy the specified user.
+     *
+     * @param User $user
+     * @return JsonResponse
+     */
+    public function destroy(User $user): JsonResponse
+    {
+        $user->disabled_at = Carbon::now();
+
+        return $this->handleResponse([], 'User deleted successfully.');
     }
 }

@@ -21,6 +21,7 @@ class Order extends Model
         'state',
         'isTakeaway',
         'total',
+        'addresses_id',
         'customer_id',
         'restaurant_id',
         'employee_id'

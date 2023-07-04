@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -20,6 +22,30 @@ class UserTest extends TestCase
 
         $response = $this->actingAs($user)
             ->getJson('/api/users');
+
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @return void
+     */
+    public function test_user_can_be_stored(): void
+    {
+        $user = User::factory()->create();
+        $user->assignRole('admin');
+
+        $body = [
+            'email' => fake()->unique()->safeEmail(),
+            'email_verified_at' => now(),
+            'firstname' => fake()->firstName,
+            'lastname' => fake()->lastName,
+            'phone' => '0650505050',
+            'password' => Hash::make('1234azer'),
+            'remember_token' => Str::random(10),
+        ];
+
+        $response = $this->actingAs($user)
+            ->postJson('/api/users', $body);
 
         $response->assertStatus(200);
     }

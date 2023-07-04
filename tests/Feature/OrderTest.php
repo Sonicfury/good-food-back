@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Address;
 use App\Models\Order;
 use App\Models\Restaurant;
 use App\Models\User;
@@ -85,6 +86,7 @@ class OrderTest extends TestCase
         $customer = User::factory()->create();
         $restaurant = Restaurant::factory()->create();
         $employee = User::factory()->create();
+        $address = Address::factory()->create();
 
         $user = User::factory()->create();
         $user->assignRole('customer');
@@ -93,6 +95,7 @@ class OrderTest extends TestCase
             'state' => 'validée',
             'isTakeaway' => true,
             'total' =>  16.99,
+            'addresses_id' => $address->id,
             'customer_id' => $customer->id,
             'restaurant_id' => $restaurant->id,
             'employee_id' => $employee->id,

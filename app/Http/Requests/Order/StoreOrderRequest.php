@@ -28,7 +28,7 @@ class StoreOrderRequest extends FormRequest
             'isTakeaway' => 'boolean',
             'total' => 'numeric|between:0,9999999999.99',
             'customer_id' => 'numeric',
-            'address_id' => 'numeric',
+            'addresses_id' => 'numeric',
             'restaurant_id' => 'numeric',
             'employee_id' => 'numeric',
         ];
