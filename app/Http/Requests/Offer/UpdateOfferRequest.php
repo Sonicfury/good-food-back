@@ -24,7 +24,7 @@ class UpdateOfferRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'nullable|string|unique:offers|max:25',
+            'name' => 'nullable|string',
             'percent' => 'nullable|numeric|between:1,99',
         ];
     }
