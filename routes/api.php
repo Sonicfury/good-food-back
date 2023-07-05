@@ -41,6 +41,10 @@ Route::get('/menus/{menu}', [MenuController::class, 'show']);
 Route::get('/offers', [OfferController::class, 'index']);
 Route::get('/offers/{offer}', [OfferController::class, 'show']);
 
+/* --- Categories --- */
+Route::get('/categories', [CategoryController::class, 'index']);
+Route::get('/categories/{category}', [CategoryController::class, 'show']);
+
 /* --- Connected user --- */
 Route::middleware('auth:sanctum')->group(function () {
 
@@ -71,9 +75,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/ordereds/{ordered}', [OrderedController::class, 'destroy']);
         Route::post('/ordereds', [OrderedController::class, 'store']);
 
-        /* --- Categories --- */
-        Route::get('/categories', [CategoryController::class, 'index']);
-        Route::get('/categories/{category}', [CategoryController::class, 'show']);
     });
 
     Route::group(['middleware' => ['role:admin|employee']], function () {
