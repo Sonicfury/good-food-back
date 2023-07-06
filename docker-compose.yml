@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+    app:
+        build:
+            context: php/php8.0/.
+        container_name: good-food-back
+        volumes:
+            - .:/var/www/html
+        working_dir: /var/www/html
+        ports:
+            - '8000:8000'
+        command: sh -c "rm -rf vendor composer.lock && composer install && php artisan serve --host=0.0.0.0"
+
+    db:
+        image: postgres:latest
+        container_name: good-food-back-db
+        restart: always
+        environment:
+            POSTGRES_USER: myuser
+            POSTGRES_PASSWORD: mypassword
+            POSTGRES_DB: mydatabase
+        ports:
+            - '5432:5432'
+        volumes:
+            - .data:/var/lib/postgresql/data
+
+volumes:
+    pgdata:
