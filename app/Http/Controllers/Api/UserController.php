@@ -8,6 +8,9 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -31,9 +34,14 @@ class UserController extends Controller
     {
         $request->validated();
 
-        $user = User::create($request->all());
+        $user = User::create([
+            'email' => $request->email,
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'password' => Hash::make('1234azer'),
+        ]);
 
-        $request->role ?? $user->assignRole($request->role);
+        $user->assignRole($request->role);
 
         return $this->handleResponse(UserResource::make($user), 'User stored successfully.');
     }

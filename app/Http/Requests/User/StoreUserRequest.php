@@ -30,7 +30,7 @@ class StoreUserRequest extends FormRequest
             'phone' => ['nullable', 'regex:/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/'],
             'birthDate' => 'nullable|date',
             'restaurant_id' => 'nullable|numeric',
-            'role' => 'nullable|string'
+            'role' => 'string'
         ];
     }
 }

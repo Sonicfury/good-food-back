@@ -19,7 +19,7 @@ class MenuResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'price' => $this->price,
-            'products' => ProductResource::collection($this->products),
+            'products' => $this->products,
             'image' => $this->getMediaFile('menu_image'),
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,

@@ -22,9 +22,9 @@ class UserResource extends JsonResource
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,
             'disabledAt' => $this->disable_at,
-            'restaurant' => RestaurantResource::make($this->restaurant_id),
-            'roles' => RoleResource::collection($this->roles),
-            'adresses' => AddressResource::collection($this->addresses),
+            'restaurant' => $this->restaurant_id,
+            'roles' => $this->roles,
+            'adresses' => $this->addresses,
         ];
     }
 }

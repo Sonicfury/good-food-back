@@ -19,8 +19,8 @@ class OrderedResource extends JsonResource
             'id' => $this->id,
             'comment' => $this->comment,
             'quantity' => $this->quantity,
-            'product' => ProductResource::make($this->product),
-            'menu' => MenuResource::make($this->menu),
+            'product' => $this->product,
+            'menu' => $this->menu,
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,
         ];

@@ -22,7 +22,7 @@ class OrderResource extends JsonResource
             'state' => $this->state,
             'isTakeaway' => $this->isTakeaway,
             'total' => $this->total,
-            'ordered' => OrderedResource::collection($this->ordereds),
+            'ordered' => $this->ordereds,
             'customer' => UserResource::make(User::find($this->customer_id)),
             'restaurant' => $this->restaurant,
             'employee' => $this->employee_id,
