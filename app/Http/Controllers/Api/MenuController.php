@@ -7,6 +7,7 @@ use App\Http\Requests\Menu\StoreMenuRequest;
 use App\Http\Requests\Menu\UpdateMenuRequest;
 use App\Http\Resources\MenuResource;
 use App\Models\Menu;
+use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 
 class MenuController extends Controller
@@ -34,6 +35,18 @@ class MenuController extends Controller
         $menu = Menu::create($request->all());
 
         return $this->handleResponse(MenuResource::make($menu), 'Menu stored successfully.');
+    }
+
+    /**
+     * @param Menu $menu
+     * @param Product $product
+     * @return JsonResponse
+     */
+    public function menu_product(Menu $menu, Product $product)
+    {
+        $menu->products()->attach($product->id);
+
+        return $this->handleResponse(MenuResource::make($menu), 'Product attach at menu successfully.');
     }
 
     /**

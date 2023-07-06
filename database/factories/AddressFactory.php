@@ -17,15 +17,24 @@ class AddressFactory extends Factory
      */
     public function definition(): array
     {
+        $names = [
+          'travail',
+          'maison',
+          'chez moi',
+          'parents',
+          'agence',
+          'home'
+        ];
+
         return [
-            'name' => fake()->word,
+            'name' => fake()->randomElement($names),
             'main' => fake()->boolean,
             'address1' => fake()->streetAddress,
             'zipCode' => fake()->postcode,
             'city' => fake()->city,
             'note' => fake()->realText,
             'phone' => fake()->e164PhoneNumber,
-            'user_id' => rand(1, 5)
+            'user_id' => rand(4, 20)
         ];
     }
 }

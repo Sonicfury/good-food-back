@@ -15,6 +15,7 @@ class MediaSeeder extends Seeder
      */
     public function run(): void
     {
+        Media::create(['name' => "restaurant_image", "mime_type" => ["jpg", "png"], "disk" => "public"]);
         Media::create(['name' => "product_image", "mime_type" => ["jpg", "png"], "disk" => "public"]);
         Media::create(['name' => "menu_image", "mime_type" => ["jpg", "png"], "disk" => "public"]);
         Media::create(['name' => "category_image", "mime_type" => ["jpg", "png"], "disk" => "public"]);

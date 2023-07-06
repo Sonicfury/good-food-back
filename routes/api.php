@@ -115,6 +115,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::match(['put', 'patch'], '/menus/{menu}', [MenuController::class, 'update']);
         Route::delete('/menus/{menu}', [MenuController::class, 'destroy']);
         Route::post('/menus', [MenuController::class, 'store']);
+        Route::post('/menus/{menu}/products/{product}', [MenuController::class, 'menu_product']);
 
         /* --- Offers --- */
         Route::match(['put', 'patch'], '/offers/{offer}', [OfferController::class, 'update']);

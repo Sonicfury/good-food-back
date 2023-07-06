@@ -18,9 +18,8 @@ class DatabaseSeeder extends Seeder
             RestaurantSeeder::class,
             CategorySeeder::class,
             ProductSeeder::class,
-            OfferSeeder::class,
             MenuSeeder::class,
-            AddressSeeder::class,
+            OfferSeeder::class,
             OrderSeeder::class,
         ]);
     }

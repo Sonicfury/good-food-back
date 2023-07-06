@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $users = User::factory()
-            ->count(10)
+            ->count(20)
             ->create();
 
         foreach ($users as $user) {
@@ -26,6 +26,12 @@ class UserSeeder extends Seeder
                 3 => $user->assignRole('employee'),
                 default => $user->assignRole('customer')
             };
+
+            $addresses = Address::factory()->count(rand(1, 3))->create();
+
+            foreach ($addresses as $address) {
+                $user->addresses()->save($address);
+            }
         }
     }
 }

@@ -22,8 +22,8 @@ class OrderedFactory extends Factory
         return [
             'comment' => fake()->text(50),
             'quantity' => rand(1, 4),
-            'product_id' => $is_product == 1 ? rand(1, 14) : null,
-            'menu_id' => $is_product == 0 ? rand(1, 14) : null,
+            'product_id' => $is_product == 1 ? rand(1, 20) : null,
+            'menu_id' => $is_product == 0 ? rand(1, 5) : null,
             'order_id' => rand(1, 29),
         ];
     }

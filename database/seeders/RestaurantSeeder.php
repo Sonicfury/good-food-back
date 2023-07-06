@@ -14,8 +14,12 @@ class RestaurantSeeder extends Seeder
      */
     public function run(): void
     {
-        Restaurant::factory()
+        $restaurants = Restaurant::factory()
             ->count(5)
             ->create();
+
+        foreach ($restaurants as $restaurant){
+            $restaurant->assignMedia(["restaurant_image"]);
+        }
     }
 }
