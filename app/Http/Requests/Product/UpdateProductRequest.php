@@ -4,6 +4,7 @@ namespace App\Http\Requests\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+
 class UpdateProductRequest extends FormRequest
 {
     /**
@@ -26,7 +27,6 @@ class UpdateProductRequest extends FormRequest
         return [
             'name' => 'nullable|string|unique:products|max:25',
             'price' => 'nullable|numeric|between:0,9999999999.99',
-            'image' => 'nullable',
             'category_id' => 'nullable|numeric',
         ];
     }

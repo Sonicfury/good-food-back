@@ -33,10 +33,6 @@ class MenuController extends Controller
 
         $menu = Menu::create($request->all());
 
-        if ($request->file('image')) {
-            $menu->addMediaFile($request->file('image'), "menu_image");
-        }
-
         return $this->handleResponse(MenuResource::make($menu), 'Menu stored successfully.');
     }
 

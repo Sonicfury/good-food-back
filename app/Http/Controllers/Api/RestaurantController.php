@@ -36,10 +36,6 @@ class RestaurantController extends Controller
 
         $restaurant = Restaurant::create($request->all());
 
-        if ($request->file('image')) {
-            $restaurant->addMediaFile($request->file('image'), "restaurant_image");
-        }
-
         return $this->handleResponse(RestaurantResource::make($restaurant), 'Restaurant stored successfully.');
     }
 

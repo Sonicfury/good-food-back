@@ -26,7 +26,6 @@ class StoreProductRequest extends FormRequest
         return [
             'name' => 'string|unique:products|max:25',
             'price' => 'numeric|between:0,9999999999.99',
-            'image' => 'nullable',
             'category_id' => 'numeric',
         ];
     }

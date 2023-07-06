@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\OfferController;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\MediaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -86,6 +87,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
         /* --- Addresses --- */
         Route::get('/addresses', [AddressController::class, 'index']);
+
+        /* --- Medias --- */
+        Route::post('/medias', [MediaController::class, 'addMedia']);
 
         /* --- Restaurants --- */
         Route::match(['put', 'patch'], '/restaurants/{restaurant}', [RestaurantController::class, 'update']);

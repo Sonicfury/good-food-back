@@ -28,8 +28,7 @@ class StoreRestaurantRequest extends FormRequest
             'address1' => 'string',
             'zipCode' => 'numeric|max:99999',
             'city' => 'string',
-            'primaryPhone' => 'regex:/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/',
-            'image' => 'nullable',
+            'phone' => 'regex:/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/',
         ];
     }
 }
