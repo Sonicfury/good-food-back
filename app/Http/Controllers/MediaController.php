@@ -44,7 +44,11 @@ class MediaController extends Controller
             ],
         };
 
-        $model['model']->addMediaFile($request->file('image'), $model['media']);
+        if ($model['model']->getMediaFile($model['media'])) {
+            $model['model']->updateMediaFile($request->file('image'), $model['media']);
+        } else {
+            $model['model']->addMediaFile($request->file('image'), $model['media']);
+        }
 
         return $this->handleResponse($model['resource'], 'Media file stored or updated successfully.');
     }

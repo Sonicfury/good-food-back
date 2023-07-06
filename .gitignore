@@ -21,3 +21,6 @@ yarn-error.log
 composer.lock
 /data/
 /.data/
+/public/categories/
+/public/menus/
+/public/products/
